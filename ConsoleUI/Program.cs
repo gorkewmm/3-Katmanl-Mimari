@@ -1,18 +1,24 @@
 ﻿using Business.Concrete;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFranework;
 using DataAccess.Concrete.InMemory;
 using System;
 
 namespace ConsoleUI
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            IProductDal inMemoryProductDal = new InMemoryProductDal();
-            ProductManager productManager = new ProductManager(inMemoryProductDal);
+            ProductManager productManager = new ProductManager(new EfProductDal());
 
-            foreach (var p in productManager.GetAll())
+            foreach (var p in productManager.GetAllByCategoryId(2))
+            {
+                Console.WriteLine(p.ProductName);
+
+            }
+
+            foreach (var p in productManager.GetByUnitPrice(50,100))
             {
                 Console.WriteLine(p.ProductName);
 
