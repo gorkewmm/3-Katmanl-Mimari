@@ -7,9 +7,19 @@ using System.Threading.Tasks;
 namespace Core.Utilities.Results
 {
     public class Result : IResult
-    {
-        public bool Success { get; }
+    {   //getter readonly'dir. Readonly'ler ctor'da set edilebilir.
 
+        public Result(bool success, string message) : this(success) //this kullanık çünkü do not repeat yourself
+        {
+            //Success = success;
+            Message = message;
+        }
+        public Result(bool success) //Constructor overloading yaptık. 
+        {
+            Success = success;
+        }
+
+        public bool Success { get; }
         public string Message { get; }
     }
 }

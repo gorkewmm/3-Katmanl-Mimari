@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -19,10 +20,11 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
-        public void Add(Product product)
+        public IResult Add(Product product)
         {
             // İş kodları ve kuralları burada, 
             _productDal.Add(product);
+            return new SuccessResult();
         }
 
         public List<Product> GetAll()
